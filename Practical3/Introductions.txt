@@ -1,5 +1,7 @@
 Hello. 
 My name is Gabriel.
 I like drinking milktea and eating ice-creams.
+I can play the piano, and I am trying to play basketball and the guitar better.
+I have a lover called Leyi who is a pretty girl.
 I am enjoying learning.
 I am happy that I can push my repo from Visual Studio Code to GitHub
