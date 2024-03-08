@@ -10,3 +10,4 @@ X,Y=True,False
 W=X or Y
 print(W)
 #Return "True"
+#the overall return will be "False" "True"
