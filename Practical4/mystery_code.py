@@ -1,3 +1,4 @@
+#this code was obtained from blackboard folder
 # What does this piece of code do?
 # Answer: add 100 random numbers together
 
