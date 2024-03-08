@@ -2,6 +2,6 @@
 #i represents the ordinal number, when i adds 1, a is caculated as multiple by 2 and add 3.
 a=0.5
 i=1
-for i in (1,7,1):
+for i in (1,6,1):
     a=2*a+3
     print(a)
