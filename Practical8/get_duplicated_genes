@@ -1,0 +1,41 @@
+import re
+import os
+handle = open(r"C:\Users\吴雨馨\Downloads\Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa", 'r')
+output_file = open("duplicated_genes.txt", "w")
+found_duplication = False
+for line in handle:
+    line = line.rstrip()
+    if line.startswith('Y'):
+        found_duplication = False  # 如果遇到新的以'V'开头的行，重置found_duplication为False
+    if found_duplication:
+        output_file.write(line + "\n")
+    if 'duplication' in line:
+        found_duplication = True # 如果找到了'duplication'，将found_duplication置为True
+        gene_name=line[:line.find(' ')]
+        output_file.write(gene_name)  # 将当前行写入输出文件
+handle.close()
+output_file.close()
+
+os.listdir()
+dup_genes = open("duplicated_genes.txt").read(2000)
+print(dup_genes)
+#for line in handle:
+    line = line.rstrip()
+    if line.startswith('V'):
+        continue
+        if 'duplication' in line:
+
+
+#def filter_and_save(input_file, output_file):
+        with open(input_file, 'r') as f_in:
+            lines = f_in.readlines()
+
+        filtered_lines = [line for line in lines if 'duplication' in line]
+
+        with open(output_file, 'w') as f_out:
+            f_out.writelines(filtered_lines)
+
+# 调用函数，传入输入文件和输出文件的路径
+#input_file = r"C:\Users\吴雨馨\Downloads\Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa"
+#output_file = 'duplicated_genes.txt'
+#filter_and_save(input_file, output_file)

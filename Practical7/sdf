@@ -1,0 +1,5 @@
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+os.chdir(r"C:\Users\吴雨馨\Downloads\dalys-rate-from-all-causes(1).csv")
