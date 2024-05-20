@@ -1,0 +1,6 @@
+The edit sidtance for P31652(rat) and P31645(human) is 52 with percentage 8.253968253968253 %
+The edit sidtance for Q60857(mouse) and P31645(human) is 47 with percentage 7.4603174603174605 %
+The edit sidtance for Q60857(mouse) and P31652(rat) is 20 with percentage 3.1746031746031744 %
+
+Thus, the differences between human and mouse is smaller than the difference between human and rat
+Mouse is more suitable to be the model organism for human.

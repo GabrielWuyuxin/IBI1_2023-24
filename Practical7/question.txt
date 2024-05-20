@@ -1,0 +1,9 @@
+Question:Plot a boxplot of DALYs across countries in 2019, and discuss what it shows
+Line number for the code starts: 36
+The result:
+During the plotting I discovered that it is difficult to draw boxplot of DALYs across countries in a single year of 2019,
+and the boxplot can't express varies across countries,
+so I changed it to scatter plot.
+The DAPYs values vary widely between countries. Values of most countries are above 20000,
+the biggest value is above 90000.
+
