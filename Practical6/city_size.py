@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 uk_cities=[0.56,0.62,0.04,9.7]
 china_cities=[0.58,8.4,29.9,22.2]
+uk_cities.sort()
+china_cities.sort()
+print(uk_cities)
+print(china_cities)
 #these are two lists of city sizes of UK and China
 china_citynames=['Haining','Hangzhou','Shanghai','Beijing']
 uk_citynames=['Edinburgh','Glasgow','Stirling','London']

@@ -1,31 +1,31 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 初始化一个100x100的网格，所有人口均为易感者（值为0）
+# Initialize a 100x100 grid with all populations as susceptible (value 0)
 population = np.zeros((100, 100))
 
-# 随机选择一个位置作为初始感染点
+# Randomly select a location as the initial infection point
 outbreak = np.random.choice(range(100), 2)
 population[outbreak[0], outbreak[1]] = 1  # 设置初始感染点
 
-# 设置参数
-beta = 0.3  # 感染概率
-gamma = 0.05  # 康复概率
-time_steps = 100  # 模拟时间步数
+# set up parameters
+beta = 0.3  # infected probability
+gamma = 0.05  # recover probability
+time_steps = 100  # Simulated time steps
 
 for t in range(time_steps):
-    # 找到所有感染点的索引
+    # Find an index of all infected points
     infectedIndex = np.where(population == 1)
     
-    # 创建一个新的网格用于更新人口状态
+    # Create a new grid to update the population status
     new_population = population.copy()
     
-    # 遍历所有感染点
+    # Go through all the infection points
     for i in range(len(infectedIndex[0])):
         x = infectedIndex[0][i]
         y = infectedIndex[1][i]
         
-        # 感染周围的邻居点
+        # Infect the surrounding neighborhood points
         for xNeighbour in range(x-1, x+2):
             for yNeighbour in range(y-1, y+2):
                 if (xNeighbour, yNeighbour) != (x, y):
@@ -33,17 +33,17 @@ for t in range(time_steps):
                         if population[xNeighbour, yNeighbour] == 0:
                             new_population[xNeighbour, yNeighbour] = np.random.choice([0, 1], p=[1-beta, beta])
     
-    # 更新感染者状态为康复者
+    # Update the status of infected persons to recovered
     for i in range(len(infectedIndex[0])):
         x = infectedIndex[0][i]
         y = infectedIndex[1][i]
         if np.random.random() < gamma:
             new_population[x, y] = 2
     
-    # 更新人口状态
+    # Update population status
     population = new_population.copy()
     
-    # 每10个时间步绘制一次当前状态
+    # Draw the current state every 10 time steps
     if t % 10 == 0:
         plt.figure(figsize=(6, 4), dpi=150)
         plt.imshow(population, cmap='viridis', interpolation='nearest')
