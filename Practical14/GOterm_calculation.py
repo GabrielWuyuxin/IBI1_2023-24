@@ -15,6 +15,7 @@ doc = xml.dom.minidom.parse(r'C:\Users\吴雨馨\IBI1\IBI1_2023-24\IBI1_2023-24\
 go_terms = doc.getElementsByTagName('term')
 
 #print(go_terms)
+#for me to check whether the go_terms was all right
 
 # Initialize counter
 bp_count = 0

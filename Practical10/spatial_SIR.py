@@ -6,8 +6,7 @@ population = np.zeros((100, 100))
 
 # Randomly select a location as the initial infection point
 outbreak = np.random.choice(range(100), 2)
-population[outbreak[0], outbreak[1]] = 1  # 设置初始感染点
-
+population[outbreak[0], outbreak[1]] = 1  # Set the initial infection point
 # set up parameters
 beta = 0.3  # infected probability
 gamma = 0.05  # recover probability
