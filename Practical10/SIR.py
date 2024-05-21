@@ -2,33 +2,38 @@ import scipy.integrate
 import numpy as np
 import matplotlib.pyplot as plt
 # model
-#S,I,R are three output values.Each time beta*i*s susceptible will turn into infected, and gamma*i infected turn into recover
-#dS/dt=beta*i(t)*s(t),di/dt=beta*i(t)*s(t)-gamma*i(t),dr/dt=gamma*i(t)
-def SIR_model(y, t, beta, gamma):
-    S, I, R = y
-    dS_dt = -beta * S * I
-    dI_dt = beta * S * I - gamma * I
-    dR_dt = gamma * I
-    return ([dS_dt, dI_dt, dR_dt])
-
-
 # initialization
-S0 =9999 #number of people
-I0 = 1 #number of people
+N=10000 #number of people
+I0 = 1 #number of people, the initial infected
 R0 = 0 #number of people
 beta = 0.3
 gamma = 0.05
 
-# time vector
-t = np.linspace(0, 1, 10000)
-# result
-res = scipy.integrate.odeint(SIR_model, [S0, I0, R0], t, args=(beta, gamma))
-res = np.array(res)
+# Arrays to track S, I, R
+S = [N - I0]
+I = [I0]
+R = [0]
+
+# Simulation parameters
+time_steps = 1000
+
+# Simulation loop
+for t in range(time_steps):
+    new_infected = np.random.choice(range(2), S[-1], p=[1-beta*I[-1]/N, beta*I[-1]/N]).sum()
+    new_recovered = np.random.choice(range(2), I[-1], p=[1-gamma, gamma]).sum()
+
+    S.append(S[-1] - new_infected)
+    I.append(I[-1] + new_infected - new_recovered)
+    R.append(R[-1] + new_recovered)
+
+
+
+
 # plot
 plt.figure(figsize=[8, 4],dpi=150) #dpi=Points per inch of the figure
-plt.plot(t, res[:, 0], label='S(t)')
-plt.plot(t, res[:, 1], label='I(t)')
-plt.plot(t, res[:, 2], label='R(t)')
+plt.plot(S, label='Susceptible')
+plt.plot(I, label='Infected')
+plt.plot(R, label='Recovered')
 plt.legend()
 plt.grid()
 plt.xlabel('time')

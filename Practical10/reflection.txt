@@ -1,0 +1,7 @@
+Reflection on Practical 10
+
+This practical has several difficult parts. Initially, implementing the basic SIR model was straightforward as it involved familiar concepts from probability and Python programming. The challenge increased with the vaccination model, requiring a deeper understanding of epidemiological thresholds and how different vaccination rates impact disease spread. 
+
+The spatial model was the most difficult, as it required thinking about neighbor interactions and spatial propagation of the disease. 
+
+The most enjoyable part was visualizing the results, seeing how the disease spread over time and under different conditions. The most important thing I learned was the importance of probabilistic models in capturing the variability inherent in real-world scenarios.

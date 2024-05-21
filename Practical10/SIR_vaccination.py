@@ -2,37 +2,46 @@ import scipy.integrate
 import numpy as np
 import matplotlib.pyplot as plt
 # model
-#S,I,R are three output values.Each time beta*i*s susceptible will turn into infected, and gamma*i infected turn into recover
-#dS/dt=beta*i(t)*s(t),di/dt=beta*i(t)*s(t)-gamma*i(t),dr/dt=gamma*i(t)
-def SIR_model(y, t, beta, gamma):
-    S, I= y
-    dS_dt=beta*S*I
-    dI_dt = beta * S * I - gamma * I
-    return ([dS_dt,dI_dt])
 
+def run_simulation(vaccination_rate):
+    # Initial population parameters
+    N = 10000
+    I0 = 1
+    vaccinated = int(N * vaccination_rate)
+    beta = 0.3
+    gamma = 0.05
 
-# initialization
-N = 10000
-S=[0]
-I=[1] 
-R=[2]
-beta = 0.3
-gamma = 0.05
-for i in range(0,1000):
-    infected_probability=np.random.choice(range(2),S[i],p=[,])
-# time vector
-t = np.linspace(0, 1, 10000)
+    # Arrays to track S, I, R
+    S = [N - I0 - vaccinated]
+    I = [I0]
+    R = [vaccinated]
+
+    # Simulation parameters
+    time_steps = 1000
+
+    # Simulation loop
+    for t in range(time_steps):
+        new_infected = np.random.choice(range(2), S[-1], p=[1-beta*I[-1]/N, beta*I[-1]/N]).sum()
+        new_recovered = np.random.choice(range(2), I[-1], p=[1-gamma, gamma]).sum()
+
+        S.append(S[-1] - new_infected)
+        I.append(I[-1] + new_infected - new_recovered)
+        R.append(R[-1] + new_recovered)
+
+    return S, I, R
+
+# Run simulations for different vaccination rates
+vaccination_rates=[]
+for i in range(0, 100, 10):
+    vaccination_rates.append(i / 100)
+for rate in vaccination_rates:
+    S, I, R = run_simulation(rate)
+    plt.plot(I, label=f'{rate*100}% vaccinated')
+
 # plot
-plt.figure(figsize=[6, 4],dpi=150) #dpi=Points per inch of the figure
-for vaccinated in range(0, 100, 10):  # vaccination from 0% to 90%
-    S0 = N - N * (vaccinated / 100)-1  
-    res = scipy.integrate.odeint(SIR_model, [S0, I0], t, args=(beta, gamma))
-    res = np.array(res)
-    #print (S0) #make sure that S0 meet expectation
-    plt.plot(t, res[:, 1], label=f'Vaccinated: {vaccinated}%')
 plt.legend()
 plt.grid()
 plt.xlabel('time')
 plt.ylabel('numbers')
-plt.title('SIR model with vaccination')
+plt.title('SIR model simulation')
 plt.show()
